@@ -7,6 +7,7 @@ setup:
 .PHONY: test
 test:
 	docker-compose exec php php -version && \
+	docker-compose exec php php-cs-fixer fix && \
 	docker-compose exec php ./vendor/bin/phpunit
 
 .PHONY: prod
