@@ -15,19 +15,8 @@ use Tests\TestHelper\StrTestHelper;
 
 class Rss2Test extends TestCase
 {
-    /**
-     * @var XmlVersion
-     */
     private XmlVersion $xmlVersion;
-
-    /**
-     * @var XmlEncoding
-     */
     private XmlEncoding $xmlEncoding;
-
-    /**
-     * @var RssVersion
-     */
     private RssVersion $rssVersion;
 
     protected function setUp(): void
