@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\Entities;
 
+use DateTime;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
@@ -42,5 +43,49 @@ class ChannelTest extends TestCase
         $this->assertEquals($category, $channel->category());
         $this->assertEquals($pubDate, $channel->pubDate());
         return $channel;
+    }
+
+    /**
+     * @depends test__construct
+     * @param Channel $channel
+     */
+    public function testSetLanguage(Channel $channel)
+    {
+        $expected = Language::LANGUAGE_ENGLISH;
+        $channel->setLanguage($expected);
+        $this->assertEquals($expected, (string)$channel->language());
+    }
+
+    /**
+     * @depends test__construct
+     * @param Channel $channel
+     */
+    public function testSetCopyright(Channel $channel)
+    {
+        $expected = StrTestHelper::createRandomStr();
+        $channel->setCopyright($expected);
+        $this->assertEquals($expected, (string)$channel->copyright());
+    }
+
+    /**
+     * @depends test__construct
+     * @param Channel $channel
+     */
+    public function testSetCategory(Channel $channel)
+    {
+        $expected = StrTestHelper::createRandomStr();
+        $channel->setCategory($expected);
+        $this->assertEquals($expected, (string)$channel->category());
+    }
+
+    /**
+     * @depends test__construct
+     * @param Channel $channel
+     */
+    public function testPubDate(Channel $channel)
+    {
+        $expected = new DateTime();
+        $channel->setPubDate($expected);
+        $this->assertEquals($expected, $channel->pubDate());
     }
 }

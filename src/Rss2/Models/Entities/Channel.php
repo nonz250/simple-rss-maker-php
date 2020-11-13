@@ -100,4 +100,24 @@ final class Channel
     {
         return $this->pubDate;
     }
+
+    public function setLanguage(string $language): void
+    {
+        $this->language = new Language($language);
+    }
+
+    public function setCopyright(string $copyright): void
+    {
+        $this->copyright = new Copyright($copyright);
+    }
+
+    public function setCategory(string $category): void
+    {
+        $this->category = new Category($category);
+    }
+
+    public function setPubDate(DateTimeInterface $pubDate): void
+    {
+        $this->pubDate = $pubDate;
+    }
 }
