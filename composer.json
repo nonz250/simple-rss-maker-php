@@ -1,0 +1,34 @@
+{
+    "name": "nonz250/simple-rss-maker-php",
+    "description": "This package allows you to create RSS easily.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nozomi Hosaka",
+            "email": "hosaka.non.work@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleRssMaker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "composer dump-autoload"
+        ]
+    }
+}
