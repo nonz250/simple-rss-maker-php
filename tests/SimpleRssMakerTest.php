@@ -8,7 +8,6 @@ use DateTimeZone;
 use Exception;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Shared\Exceptions\ChannelNotExistException;
-use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\SimpleRssMaker;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\SimpleRssMakerInterface;
@@ -18,7 +17,7 @@ class SimpleRssMakerTest extends TestCase
 {
     public function test__construct()
     {
-        $simpleRSSMaker = new SimpleRssMaker(XmlEncoding::UTF8);
+        $simpleRSSMaker = new SimpleRssMaker();
         $this->assertInstanceOf(SimpleRssMaker::class, $simpleRSSMaker);
         return $simpleRSSMaker;
     }

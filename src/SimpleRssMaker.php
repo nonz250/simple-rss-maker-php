@@ -25,7 +25,7 @@ class SimpleRssMaker implements SimpleRssMakerInterface
      */
     private ?Channel $channel;
 
-    public function __construct(string $xmlEncoding)
+    public function __construct(string $xmlEncoding = XmlEncoding::UTF8)
     {
         $this->xmlEncoding = new XmlEncoding($xmlEncoding);
         $this->channel = null;
