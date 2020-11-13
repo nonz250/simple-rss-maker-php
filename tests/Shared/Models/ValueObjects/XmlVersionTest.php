@@ -14,13 +14,14 @@ class XmlVersionTest extends TestCase
         $version = new XmlVersion(XmlVersion::VERSION_1);
         $this->assertEquals(XmlVersion::VERSION_1, $version->value());
         $this->assertEquals(XmlVersion::VERSION_1, (string)$version);
+        $this->assertEquals((int)XmlVersion::VERSION_1, $version->toInt());
     }
 
     public function testCreateVersion1_1()
     {
         $version = new XmlVersion(XmlVersion::VERSION_1_1);
         $this->assertEquals(XmlVersion::VERSION_1_1, $version->value());
-        $this->assertEquals(XmlVersion::VERSION_1_1, (string)$version);
+        $this->assertEquals((float)XmlVersion::VERSION_1_1, (string)$version->toFloat());
     }
 
     public function testException()

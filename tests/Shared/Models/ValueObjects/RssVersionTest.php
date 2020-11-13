@@ -14,6 +14,7 @@ class RssVersionTest extends TestCase
         $rssVersion = new RssVersion(RssVersion::VERSION_2);
         $this->assertEquals(RssVersion::VERSION_2, $rssVersion->value());
         $this->assertEquals(RssVersion::VERSION_2, (string)$rssVersion);
+        $this->assertEquals((int)RssVersion::VERSION_2, $rssVersion->toInt());
     }
 
     public function testException()

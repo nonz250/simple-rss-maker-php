@@ -40,4 +40,9 @@ abstract class Enum
     {
         return (int)$this->value;
     }
+
+    public function toFloat(): float
+    {
+        return (float)$this->value;
+    }
 }
