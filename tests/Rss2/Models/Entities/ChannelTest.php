@@ -34,6 +34,13 @@ class ChannelTest extends TestCase
             $pubDate
         );
         $this->assertInstanceOf(Channel::class, $channel);
+        $this->assertEquals($title, $channel->title());
+        $this->assertEquals($link, $channel->link());
+        $this->assertEquals($description, $channel->description());
+        $this->assertEquals($language, $channel->language());
+        $this->assertEquals($copyright, $channel->copyright());
+        $this->assertEquals($category, $channel->category());
+        $this->assertEquals($pubDate, $channel->pubDate());
         return $channel;
     }
 }

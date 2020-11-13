@@ -43,6 +43,9 @@ final class Channel
      */
     private Category $category;
 
+    /**
+     * @var DateTimeInterface|null
+     */
     private ?DateTimeInterface $pubDate;
 
     public function __construct(
@@ -61,5 +64,40 @@ final class Channel
         $this->copyright = $copyright;
         $this->category = $category;
         $this->pubDate = $pubDate;
+    }
+
+    public function title(): Title
+    {
+        return $this->title;
+    }
+
+    public function link(): Link
+    {
+        return $this->link;
+    }
+
+    public function description(): Description
+    {
+        return $this->description;
+    }
+
+    public function language(): Language
+    {
+        return $this->language;
+    }
+
+    public function copyright(): Copyright
+    {
+        return $this->copyright;
+    }
+
+    public function category(): Category
+    {
+        return $this->category;
+    }
+
+    public function pubDate(): ?DateTimeInterface
+    {
+        return $this->pubDate;
     }
 }
