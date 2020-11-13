@@ -50,7 +50,7 @@ class SimpleRssMaker implements SimpleRssMakerInterface
         return $this;
     }
 
-    public function rss2($xmlEncoding = XmlEncoding::UTF8): string
+    public function rss2(): string
     {
         if (!$this->channel instanceof Channel) {
             throw new ChannelNotExistException(
