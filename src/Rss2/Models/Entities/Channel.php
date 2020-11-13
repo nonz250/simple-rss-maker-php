@@ -9,6 +9,7 @@ use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Link;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
+use SimpleRssMaker\Shared\Models\ValueObjects\Date;
 use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 
 final class Channel
@@ -44,9 +45,9 @@ final class Channel
     private Category $category;
 
     /**
-     * @var DateTimeInterface|null
+     * @var Date|null
      */
-    private ?DateTimeInterface $pubDate;
+    private ?Date $pubDate;
 
     public function __construct(
         Title $title,
@@ -55,7 +56,7 @@ final class Channel
         Language $language,
         Copyright $copyright,
         Category $category,
-        ?DateTimeInterface $pubDate
+        ?Date $pubDate
     ) {
         $this->title = $title;
         $this->link = $link;
@@ -96,7 +97,7 @@ final class Channel
         return $this->category;
     }
 
-    public function pubDate(): ?DateTimeInterface
+    public function pubDate(): ?Date
     {
         return $this->pubDate;
     }
@@ -118,6 +119,6 @@ final class Channel
 
     public function setPubDate(DateTimeInterface $pubDate): void
     {
-        $this->pubDate = $pubDate;
+        $this->pubDate = new Date($pubDate);
     }
 }

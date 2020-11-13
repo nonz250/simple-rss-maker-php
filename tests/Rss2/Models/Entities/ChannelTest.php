@@ -86,6 +86,6 @@ class ChannelTest extends TestCase
     {
         $expected = new DateTime();
         $channel->setPubDate($expected);
-        $this->assertEquals($expected, $channel->pubDate());
+        $this->assertEquals($expected->format(DateTime::RFC822), (string)$channel->pubDate());
     }
 }
