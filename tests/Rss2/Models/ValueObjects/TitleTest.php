@@ -5,12 +5,13 @@ namespace Tests\Rss2\Models\ValueObjects;
 
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use PHPUnit\Framework\TestCase;
+use Tests\TestHelper\StrTestHelper;
 
 class TitleTest extends TestCase
 {
     public function test__construct()
     {
-        $expected = 'title';
+        $expected = StrTestHelper::createRandomStr();
         $title = new Title($expected);
         $this->assertInstanceOf(Title::class, $title);
         $this->assertEquals($expected, (string)$title);
