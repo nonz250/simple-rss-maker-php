@@ -16,4 +16,10 @@ class CopyrightTest extends TestCase
         $this->assertInstanceOf(Copyright::class, $copyright);
         $this->assertEquals($expected, (string)$copyright);
     }
+
+    public function testIsEmpty()
+    {
+        $copyright = new Copyright('');
+        $this->assertTrue($copyright->isEmpty());
+    }
 }

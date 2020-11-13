@@ -16,4 +16,10 @@ class CategoryTest extends TestCase
         $this->assertInstanceOf(Category::class, $category);
         $this->assertEquals($expected, $category);
     }
+
+    public function testIsEmpty()
+    {
+        $category = new Category('');
+        $this->assertTrue($category->isEmpty());
+    }
 }

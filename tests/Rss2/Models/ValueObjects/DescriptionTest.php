@@ -17,4 +17,10 @@ class DescriptionTest extends TestCase
         $this->assertEquals($expected, (string)$description);
         return $description;
     }
+
+    public function testIsEmpty()
+    {
+        $description = new Description('');
+        $this->assertTrue($description->isEmpty());
+    }
 }

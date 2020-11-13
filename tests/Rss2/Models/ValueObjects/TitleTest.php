@@ -17,4 +17,10 @@ class TitleTest extends TestCase
         $this->assertEquals($expected, (string)$title);
         return $title;
     }
+
+    public function testIsEmpty()
+    {
+        $title = new Title('');
+        $this->assertTrue($title->isEmpty());
+    }
 }
