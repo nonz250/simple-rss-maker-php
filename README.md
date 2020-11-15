@@ -46,7 +46,11 @@ For Example.
 $simpleRssMaker = new SimpleRssMaker();
 
 // Get channel object for channel tag.
-$channel = $simpleRssMaker->channelFactory();
+$channel = $simpleRssMaker->channelFactory(
+  'title',
+  'link',
+  'description'  
+);
 
 // Set values to channel.
 $channel->setCopyright('©nonz250');
