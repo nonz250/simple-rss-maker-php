@@ -11,11 +11,7 @@ interface SimpleRssMakerInterface
     public function channelFactory(
         string $title,
         string $link,
-        string $description,
-        string $language = '',
-        string $copyright = '',
-        string $category = '',
-        ?DateTimeInterface $pubDate = null
+        string $description
     ): Channel;
 
     public function setChannel(Channel $channel): self;

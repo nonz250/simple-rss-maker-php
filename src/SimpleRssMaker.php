@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker;
 
-use DateTimeInterface;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Input;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Output;
@@ -34,11 +33,7 @@ class SimpleRssMaker implements SimpleRssMakerInterface
     public function channelFactory(
         string $title,
         string $link,
-        string $description,
-        string $language = '',
-        string $copyright = '',
-        string $category = '',
-        ?DateTimeInterface $pubDate = null
+        string $description
     ): Channel {
         $factory = new ChannelFactory();
         return $factory->newChannel($title, $link, $description);
