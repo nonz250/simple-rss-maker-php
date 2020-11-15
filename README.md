@@ -30,12 +30,6 @@ make test
 make fix
 ```
 
-### Code Fixer
-
-```shell script
-make fix
-```
-
 ### Production Test
 
 Test before you Pull Request.
