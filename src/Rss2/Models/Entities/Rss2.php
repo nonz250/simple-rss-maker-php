@@ -65,10 +65,12 @@ final class Rss2
             if (!$this->channel->category()->isEmpty()) {
                 $channel->addChild('category', (string)$this->channel->category());
             }
-//            $image = $channel->addChild('image');
-//            $image->addChild('url', 'https://example.com/sample.png');
-//            $image->addChild('title', 'title');
-//            $image->addChild('link', 'https://example.com');
+            if ($this->channel->image()) {
+                $image = $channel->addChild('image');
+                $image->addChild('title', (string)$this->channel->image()->title());
+                $image->addChild('link', (string)$this->channel->image()->link());
+                $image->addChild('url', (string)$this->channel->image()->url());
+            }
         }
 
         return $rss;

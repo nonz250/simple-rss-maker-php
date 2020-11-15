@@ -136,31 +136,40 @@ class Rss2Test extends TestCase
         $this->assertCount(1, $pubDate);
     }
 
-//    public function testImageTags()
-//    {
-//        $channelFactory = new ChannelFactory();
-//        $channel = $channelFactory->newChannel(
-//            StrTestHelper::createRandomStr(),
-//            StrTestHelper::createRandomUrl(),
-//            StrTestHelper::createRandomStr(),
-//        );
-//
-//        $imageFactory = new ImageFactory();
-//        $image = $imageFactory->newImage(
-//            StrTestHelper::createRandomStr(),
-//            StrTestHelper::createRandomUrl(),
-//            StrTestHelper::createRandomUrl(),
-//        );
-//
-//        $channel->setImage($image);
-//
-//        $rss2 = new Rss2($this->xmlVersion, $this->xmlEncoding, $this->rssVersion, $channel);
-//        $this->assertInstanceOf(Rss2::class, $rss2);
-//
-//        $dom = new DOMDocument();
-//        $dom->loadXML((string)$rss2);
-//
-//        $pubDate = $dom->getElementsByTagName('pubDate');
-//        $this->assertCount(1, $pubDate);
-//    }
+    public function testImageTags()
+    {
+        $channelFactory = new ChannelFactory();
+        $channel = $channelFactory->newChannel(
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomUrl(),
+            StrTestHelper::createRandomStr(),
+        );
+
+        $imageFactory = new ImageFactory();
+        $image = $imageFactory->newImage(
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomUrl(),
+            StrTestHelper::createRandomUrl(),
+        );
+
+        $channel->setImage($image);
+
+        $rss2 = new Rss2($this->xmlVersion, $this->xmlEncoding, $this->rssVersion, $channel);
+        $this->assertInstanceOf(Rss2::class, $rss2);
+
+        $dom = new DOMDocument();
+        $dom->loadXML((string)$rss2);
+
+        $image = $dom->getElementsByTagName('image');
+        $this->assertCount(1, $image);
+
+        $title = $dom->getElementsByTagName('title');
+        $this->assertCount(2, $title);
+
+        $link = $dom->getElementsByTagName('link');
+        $this->assertCount(2, $link);
+
+        $url = $dom->getElementsByTagName('url');
+        $this->assertCount(1, $url);
+    }
 }

@@ -76,13 +76,20 @@ class SimpleRssMakerTest extends TestCase
         $copyright = StrTestHelper::createRandomStr();
         $pubDate = new DateTime('now', new DateTimeZone('UTC'));
         $category = StrTestHelper::createRandomStr();
-
+        $imageTitle = StrTestHelper::createRandomStr();
+        $imageLink = StrTestHelper::createRandomUrl();
+        $imageUrl = StrTestHelper::createRandomUrl();
         $channel = $simpleRSSMaker
             ->channelFactory($title, $link, $description);
 
         $channel->setCopyright($copyright);
         $channel->setPubDate($pubDate);
         $channel->setCategory($category);
+
+        $image = $simpleRSSMaker
+            ->imageFactory($imageTitle, $imageLink, $imageUrl);
+
+        $channel->setImage($image);
 
         $rss2 = $simpleRSSMaker
             ->setChannel($channel)
@@ -98,6 +105,11 @@ class SimpleRssMakerTest extends TestCase
     <copyright>{$copyright}</copyright>
     <pubDate>{$pubDate->format(DateTime::RFC822)}</pubDate>
     <category>{$category}</category>
+    <image>
+      <title>{$imageTitle}</title>
+      <link>{$imageLink}</link>
+      <url>{$imageUrl}</url>
+    </image>
   </channel>
 </rss>
 
