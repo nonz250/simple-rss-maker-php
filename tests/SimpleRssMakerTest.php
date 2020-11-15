@@ -7,6 +7,7 @@ use DateTime;
 use DateTimeZone;
 use Exception;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
+use SimpleRssMaker\Rss2\Models\Entities\Image;
 use SimpleRssMaker\Shared\Exceptions\ChannelNotExistException;
 use SimpleRssMaker\SimpleRssMaker;
 use PHPUnit\Framework\TestCase;
@@ -46,6 +47,20 @@ class SimpleRssMakerTest extends TestCase
         $this->assertInstanceOf(Channel::class, $channel);
         $simpleRSSMaker->setChannel($channel);
         $this->assertIsString($simpleRSSMaker->rss2());
+    }
+
+    /**
+     * @depends test__construct
+     * @param SimpleRssMakerInterface $simpleRssMaker
+     */
+    public function testImageFactory(SimpleRssMakerInterface $simpleRssMaker)
+    {
+        $image = $simpleRssMaker->imageFactory(
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomUrl(),
+            StrTestHelper::createRandomUrl(),
+        );
+        $this->assertInstanceOf(Image::class, $image);
     }
 
     /**

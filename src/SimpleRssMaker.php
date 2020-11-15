@@ -7,7 +7,9 @@ use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Input;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Output;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
+use SimpleRssMaker\Rss2\Models\Entities\Image;
 use SimpleRssMaker\Rss2\Models\Factories\ChannelFactory;
+use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Shared\Exceptions\ChannelNotExistException;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
@@ -43,6 +45,15 @@ class SimpleRssMaker implements SimpleRssMakerInterface
     {
         $this->channel = $channel;
         return $this;
+    }
+
+    public function imageFactory(
+        string $title,
+        string $link,
+        string $url
+    ): Image {
+        $factory = new ImageFactory();
+        return $factory->newImage($title, $link, $url);
     }
 
     public function rss2(): string

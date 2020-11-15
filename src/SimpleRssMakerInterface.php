@@ -5,6 +5,7 @@ namespace SimpleRssMaker;
 
 use DateTimeInterface;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
+use SimpleRssMaker\Rss2\Models\Entities\Image;
 
 interface SimpleRssMakerInterface
 {
@@ -15,6 +16,12 @@ interface SimpleRssMakerInterface
     ): Channel;
 
     public function setChannel(Channel $channel): self;
+
+    public function imageFactory(
+        string $title,
+        string $link,
+        string $url
+    ): Image;
 
     public function rss2(): string;
 }
