@@ -8,7 +8,7 @@ use SimpleRssMaker\Foundation\ValueObjects\StringBaseValue;
 use SimpleRssMaker\Shared\Exceptions\LinkFormatException;
 use SimpleRssMaker\Shared\Exceptions\StrLengthException;
 
-final class Link extends StringBaseValue
+final class Url extends StringBaseValue
 {
     /**
      * Maximum character length of URLs when using IE

@@ -6,7 +6,7 @@ namespace SimpleRssMaker\Rss2\Models\Entities;
 use DateTimeInterface;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
-use SimpleRssMaker\Rss2\Models\ValueObjects\Link;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
 use SimpleRssMaker\Shared\Models\ValueObjects\Date;
@@ -20,9 +20,9 @@ final class Channel
     private Title $title;
 
     /**
-     * @var Link
+     * @var Url
      */
-    private Link $link;
+    private Url $link;
 
     /**
      * @var Description
@@ -51,7 +51,7 @@ final class Channel
 
     public function __construct(
         Title $title,
-        Link $link,
+        Url $link,
         Description $description,
         Language $language,
         Copyright $copyright,
@@ -72,7 +72,7 @@ final class Channel
         return $this->title;
     }
 
-    public function link(): Link
+    public function link(): Url
     {
         return $this->link;
     }

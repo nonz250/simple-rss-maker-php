@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
-use SimpleRssMaker\Rss2\Models\ValueObjects\Link;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
 use SimpleRssMaker\Shared\Models\ValueObjects\Date;
@@ -32,7 +32,7 @@ class CreateRss2InputTest extends TestCase
             new XmlEncoding(XmlEncoding::UTF8),
             new Channel(
                 new Title(StrTestHelper::createRandomStr()),
-                new Link(StrTestHelper::createRandomUrl()),
+                new Url(StrTestHelper::createRandomUrl()),
                 new Description(StrTestHelper::createRandomStr()),
                 new Language(Language::LANGUAGE_JAPANESE),
                 new Copyright(StrTestHelper::createRandomStr()),

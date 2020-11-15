@@ -8,7 +8,7 @@ use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
-use SimpleRssMaker\Rss2\Models\ValueObjects\Link;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
 use SimpleRssMaker\Shared\Models\ValueObjects\Language;
@@ -19,7 +19,7 @@ class ChannelTest extends TestCase
     public function test__construct()
     {
         $title = new Title(StrTestHelper::createRandomStr());
-        $link = new Link(StrTestHelper::createRandomUrl());
+        $link = new Url(StrTestHelper::createRandomUrl());
         $description = new Description(StrTestHelper::createRandomStr());
         $language = new Language(Language::LANGUAGE_JAPANESE);
         $copyright = new Copyright(StrTestHelper::createRandomStr());
