@@ -11,6 +11,8 @@ use SimpleXMLElement;
 
 final class Rss2
 {
+    protected const RSS_TAG = 'rss';
+
     /**
      * @var XmlVersion
      */
@@ -43,20 +45,9 @@ final class Rss2
         $this->channel = $channel;
     }
 
-    public function createXMLDOM(): DOMDocument
-    {
-        $dom = new DOMDocument((string)$this->xmlVersion, (string)$this->xmlEncoding);
-        $rss = $dom->createElement('rss');
-        $dom->appendChild($rss);
-        return $dom;
-    }
-
     public function createSimpleXmlElement(): SimpleXMLElement
     {
-        $xml = $this->createXMLDOM()->saveXML();
-
-        $rss = new SimpleXMLElement($xml);
-
+        $rss = $this->createRssElement();
         $rss->addAttribute('version', (string)$this->rssVersion);
 
         if ($this->channel) {
@@ -88,5 +79,14 @@ final class Rss2
         $dom = dom_import_simplexml($this->createSimpleXmlElement())->ownerDocument;
         $dom->formatOutput = true;
         return $dom->saveXML();
+    }
+
+    private function createRssElement(): SimpleXMLElement
+    {
+        $dom = new DOMDocument((string)$this->xmlVersion, (string)$this->xmlEncoding);
+        $rss = $dom->createElement(self::RSS_TAG);
+        $dom->appendChild($rss);
+        $xml = $dom->saveXML();
+        return new SimpleXMLElement($xml);
     }
 }
