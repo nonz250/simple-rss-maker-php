@@ -2,7 +2,7 @@
 
 ## Contributing
 
-Feel free to submit a Pull Request. However, please run the make prod command and check the test content before submitting your Pull Request.
+Feel free to submit a Pull Request. However, please run the `make prod` command and check the test content before submitting your Pull Request.
 
 ## Development
 
@@ -18,7 +18,7 @@ make setup
 
 ### Development Test
 
-Test before you Pull Request.
+Testing under development.
 
 ```shell script
 make test
@@ -28,6 +28,20 @@ make test
 
 ```shell script
 make fix
+```
+
+### Code Fixer
+
+```shell script
+make fix
+```
+
+### Production Test
+
+Test before you Pull Request.
+
+```shell script
+make prod
 ```
 
 ## How to use
