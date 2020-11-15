@@ -48,12 +48,20 @@ $simpleRssMaker = new SimpleRssMaker();
 // Get channel object for channel tag.
 $channel = $simpleRssMaker->channelFactory(
   'title',
-  'link',
+  'https://labo.nozomi.bike',
   'description'  
+);
+
+// Get image object for image tag.
+$image = $simpleRssMaker->imageFactory(
+  'logo name',
+  'https://labo.nozomi.bike',
+  'https://labo.nozomi.bike/logo.png'
 );
 
 // Set values to channel.
 $channel->setCopyright('©nonz250');
+$channel->setImage($image);
 
 // Set channel to simpleRssMaker.
 $simpleRssMaker->setChannel($channel);
