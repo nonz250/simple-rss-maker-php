@@ -41,6 +41,7 @@ class CreateRss2Test extends TestCase
                 new Copyright(StrTestHelper::createRandomStr()),
                 new Category(StrTestHelper::createRandomStr()),
                 new Date(new DateTime('now', new DateTimeZone('UTC'))),
+                null
             ),
         );
         $output = new CreateRss2Output();

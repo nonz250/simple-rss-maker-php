@@ -6,6 +6,7 @@ namespace Tests\Rss2\Models\Entities;
 use DateTime;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
@@ -25,6 +26,7 @@ class ChannelTest extends TestCase
         $copyright = new Copyright(StrTestHelper::createRandomStr());
         $category = new Category(StrTestHelper::createRandomStr());
         $pubDate = null;
+        $image = null;
         $channel = new Channel(
             $title,
             $link,
@@ -32,7 +34,8 @@ class ChannelTest extends TestCase
             $language,
             $copyright,
             $category,
-            $pubDate
+            $pubDate,
+            $image
         );
         $this->assertInstanceOf(Channel::class, $channel);
         $this->assertEquals($title, $channel->title());
@@ -42,6 +45,7 @@ class ChannelTest extends TestCase
         $this->assertEquals($copyright, $channel->copyright());
         $this->assertEquals($category, $channel->category());
         $this->assertEquals($pubDate, $channel->pubDate());
+        $this->assertEquals($image, $channel->image());
         return $channel;
     }
 
@@ -87,5 +91,22 @@ class ChannelTest extends TestCase
         $expected = new DateTime();
         $channel->setPubDate($expected);
         $this->assertEquals($expected->format(DateTime::RFC822), (string)$channel->pubDate());
+    }
+
+    /**
+     * @depends test__construct
+     * @param Channel $channel
+     */
+    public function testImage(Channel $channel)
+    {
+        $expected = (new ImageFactory())->newImage(
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomUrl(),
+            StrTestHelper::createRandomUrl(),
+        );
+        $channel->setImage($expected);
+        $this->assertEquals((string)$expected->title(), (string)$channel->image()->title());
+        $this->assertEquals((string)$expected->link(), (string)$channel->image()->link());
+        $this->assertEquals((string)$expected->url(), (string)$channel->image()->url());
     }
 }

@@ -8,6 +8,7 @@ use DOMDocument;
 use SimpleRssMaker\Rss2\Models\Entities\Rss2;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\Factories\ChannelFactory;
+use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Shared\Models\ValueObjects\RssVersion;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
@@ -65,6 +66,9 @@ class Rss2Test extends TestCase
 
         $pubDate = $dom->getElementsByTagName('pubDate');
         $this->assertCount(0, $pubDate);
+
+        $image = $dom->getElementsByTagName('image');
+        $this->assertCount(0, $image);
 
         return $rss2;
     }
@@ -131,4 +135,32 @@ class Rss2Test extends TestCase
         $pubDate = $dom->getElementsByTagName('pubDate');
         $this->assertCount(1, $pubDate);
     }
+
+//    public function testImageTags()
+//    {
+//        $channelFactory = new ChannelFactory();
+//        $channel = $channelFactory->newChannel(
+//            StrTestHelper::createRandomStr(),
+//            StrTestHelper::createRandomUrl(),
+//            StrTestHelper::createRandomStr(),
+//        );
+//
+//        $imageFactory = new ImageFactory();
+//        $image = $imageFactory->newImage(
+//            StrTestHelper::createRandomStr(),
+//            StrTestHelper::createRandomUrl(),
+//            StrTestHelper::createRandomUrl(),
+//        );
+//
+//        $channel->setImage($image);
+//
+//        $rss2 = new Rss2($this->xmlVersion, $this->xmlEncoding, $this->rssVersion, $channel);
+//        $this->assertInstanceOf(Rss2::class, $rss2);
+//
+//        $dom = new DOMDocument();
+//        $dom->loadXML((string)$rss2);
+//
+//        $pubDate = $dom->getElementsByTagName('pubDate');
+//        $this->assertCount(1, $pubDate);
+//    }
 }

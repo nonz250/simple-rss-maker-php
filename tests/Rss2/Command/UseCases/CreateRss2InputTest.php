@@ -38,6 +38,7 @@ class CreateRss2InputTest extends TestCase
                 new Copyright(StrTestHelper::createRandomStr()),
                 new Category(StrTestHelper::createRandomStr()),
                 new Date(new DateTime('now', new DateTimeZone('UTC'))),
+                null
             ),
         );
 

@@ -22,6 +22,7 @@ final class ChannelFactory implements ChannelFactoryInterface
             new Language(Language::LANGUAGE_JAPANESE),
             new Copyright(''),
             new Category(''),
+            null,
             null
         );
     }

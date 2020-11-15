@@ -49,6 +49,11 @@ final class Channel
      */
     private ?Date $pubDate;
 
+    /**
+     * @var Image|null
+     */
+    private ?Image $image;
+
     public function __construct(
         Title $title,
         Url $link,
@@ -56,7 +61,8 @@ final class Channel
         Language $language,
         Copyright $copyright,
         Category $category,
-        ?Date $pubDate
+        ?Date $pubDate,
+        ?Image $image
     ) {
         $this->title = $title;
         $this->link = $link;
@@ -65,6 +71,7 @@ final class Channel
         $this->copyright = $copyright;
         $this->category = $category;
         $this->pubDate = $pubDate;
+        $this->image = $image;
     }
 
     public function title(): Title
@@ -102,6 +109,11 @@ final class Channel
         return $this->pubDate;
     }
 
+    public function image(): ?Image
+    {
+        return $this->image;
+    }
+
     public function setLanguage(string $language): void
     {
         $this->language = new Language($language);
@@ -120,5 +132,10 @@ final class Channel
     public function setPubDate(DateTimeInterface $pubDate): void
     {
         $this->pubDate = new Date($pubDate);
+    }
+
+    public function setImage(Image $image): void
+    {
+        $this->image = $image;
     }
 }
