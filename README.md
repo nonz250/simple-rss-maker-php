@@ -8,7 +8,7 @@ Feel free to submit a Pull Request. However, please run the make prod command an
 
 We recommend using Docker for this project.
 
-## Make Commnads
+## Make Commands
 
 ### Initial Setup
 
