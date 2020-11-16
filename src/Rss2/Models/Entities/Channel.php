@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SimpleRssMaker\Rss2\Models\Entities;
 
 use DateTimeInterface;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
@@ -54,6 +55,11 @@ final class Channel
      */
     private ?Image $image;
 
+    /**
+     * @var ItemCollection
+     */
+    private ItemCollection $itemCollection;
+
     public function __construct(
         Title $title,
         Url $link,
@@ -62,7 +68,8 @@ final class Channel
         Copyright $copyright,
         Category $category,
         ?Date $pubDate,
-        ?Image $image
+        ?Image $image,
+        ItemCollection $itemCollection
     ) {
         $this->title = $title;
         $this->link = $link;
@@ -72,6 +79,7 @@ final class Channel
         $this->category = $category;
         $this->pubDate = $pubDate;
         $this->image = $image;
+        $this->itemCollection = $itemCollection;
     }
 
     public function title(): Title
@@ -137,5 +145,10 @@ final class Channel
     public function setImage(Image $image): void
     {
         $this->image = $image;
+    }
+
+    public function setItems(ItemCollection $itemCollection): void
+    {
+        $this->itemCollection = $itemCollection;
     }
 }

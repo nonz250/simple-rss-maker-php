@@ -10,6 +10,7 @@ use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Input;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Output;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\Entities\Rss2;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
@@ -41,7 +42,8 @@ class CreateRss2Test extends TestCase
                 new Copyright(StrTestHelper::createRandomStr()),
                 new Category(StrTestHelper::createRandomStr()),
                 new Date(new DateTime('now', new DateTimeZone('UTC'))),
-                null
+                null,
+                new ItemCollection()
             ),
         );
         $output = new CreateRss2Output();

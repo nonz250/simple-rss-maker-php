@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Rss2\Models\Entities;
 
 use DateTime;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
@@ -27,6 +28,7 @@ class ChannelTest extends TestCase
         $category = new Category(StrTestHelper::createRandomStr());
         $pubDate = null;
         $image = null;
+        $items = new ItemCollection();
         $channel = new Channel(
             $title,
             $link,
@@ -35,7 +37,8 @@ class ChannelTest extends TestCase
             $copyright,
             $category,
             $pubDate,
-            $image
+            $image,
+            $items
         );
         $this->assertInstanceOf(Channel::class, $channel);
         $this->assertEquals($title, $channel->title());

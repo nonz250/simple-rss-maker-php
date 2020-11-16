@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker\Rss2\Models\Factories;
 
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
@@ -23,7 +24,8 @@ final class ChannelFactory implements ChannelFactoryInterface
             new Copyright(''),
             new Category(''),
             null,
-            null
+            null,
+            new ItemCollection(),
         );
     }
 }

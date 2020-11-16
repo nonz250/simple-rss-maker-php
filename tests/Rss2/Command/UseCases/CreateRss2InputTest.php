@@ -8,6 +8,7 @@ use DateTimeZone;
 use Exception;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Input;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
@@ -38,7 +39,8 @@ class CreateRss2InputTest extends TestCase
                 new Copyright(StrTestHelper::createRandomStr()),
                 new Category(StrTestHelper::createRandomStr()),
                 new Date(new DateTime('now', new DateTimeZone('UTC'))),
-                null
+                null,
+                new ItemCollection()
             ),
         );
 
