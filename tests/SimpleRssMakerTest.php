@@ -8,6 +8,7 @@ use DateTimeZone;
 use Exception;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\Entities\Image;
+use SimpleRssMaker\Rss2\Models\Entities\Item;
 use SimpleRssMaker\Shared\Exceptions\ChannelNotExistException;
 use SimpleRssMaker\SimpleRssMaker;
 use PHPUnit\Framework\TestCase;
@@ -61,6 +62,19 @@ class SimpleRssMakerTest extends TestCase
             StrTestHelper::createRandomUrl(),
         );
         $this->assertInstanceOf(Image::class, $image);
+    }
+
+    /**
+     * @depends test__construct
+     * @param SimpleRssMakerInterface $simpleRssMaker
+     */
+    public function testItemFactory(SimpleRssMakerInterface $simpleRssMaker)
+    {
+        $item = $simpleRssMaker->itemFactory(
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomUrl(),
+        );
+        $this->assertInstanceOf(Item::class, $item);
     }
 
     /**

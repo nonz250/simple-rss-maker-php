@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker;
 
-use DateTimeInterface;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\Entities\Image;
+use SimpleRssMaker\Rss2\Models\Entities\Item;
 
 interface SimpleRssMakerInterface
 {
@@ -22,6 +22,8 @@ interface SimpleRssMakerInterface
         string $link,
         string $url
     ): Image;
+
+    public function itemFactory(string $title, string $link): Item;
 
     public function rss2(): string;
 }
