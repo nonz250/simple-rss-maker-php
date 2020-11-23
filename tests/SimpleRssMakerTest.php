@@ -106,10 +106,10 @@ class SimpleRssMakerTest extends TestCase
 
     /**
      * @depends test__construct
-     * @param SimpleRssMakerInterface $simpleRSSMaker
+     * @param SimpleRssMakerInterface $simpleRssMaker
      * @throws Exception
      */
-    public function testRss2(SimpleRssMakerInterface $simpleRSSMaker)
+    public function testRss2(SimpleRssMakerInterface $simpleRssMaker)
     {
         $title = StrTestHelper::createRandomStr();
         $link = StrTestHelper::createRandomUrl();
@@ -128,7 +128,7 @@ class SimpleRssMakerTest extends TestCase
         $itemCategory = StrTestHelper::createRandomStr();
         $itemDate = new DateTime('now', new DateTimeZone('UTC'));
 
-        $rss2 = $simpleRSSMaker
+        $rss2 = $simpleRssMaker
             ->setChannel($title, $link, $description, $language, $copyright, $category, $pubDate)
             ->setImage($imageTitle, $imageLink, $imageUrl)
             ->addItem($itemTitle, $itemLink, $itemDescription, $itemAuthor, $itemCategory, $itemDate)
