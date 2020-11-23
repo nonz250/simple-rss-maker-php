@@ -45,26 +45,28 @@ For Example.
 ```php
 $simpleRssMaker = new SimpleRssMaker();
 
-// Get channel object for channel tag.
-$channel = $simpleRssMaker->channelFactory(
-  'title',
-  'https://labo.nozomi.bike',
-  'description'  
-);
+$xml = $simpleRssMaker
+    // Channel settings.
+    ->setChannel('title', 'link', 'description', 'language', 'copyright', 'category', 'pubDate')
+    // Image settings.
+    ->setImage('title', 'link', 'url')
+    // Item settings.
+    ->addItem('title', 'link', 'description', 'author', 'category', 'datetime')
+    ->addItem('title', 'link')
+    // Generate RSS2.0 string.
+    ->rss2();
 
-// Get image object for image tag.
-$image = $simpleRssMaker->imageFactory(
-  'logo name',
-  'https://labo.nozomi.bike',
-  'https://labo.nozomi.bike/logo.png'
-);
+// If you have more than one article.
+$simpleRssMaker = $simpleRssMaker
+    // Channel settings.
+    ->setChannel('title', 'link', 'description', 'language', 'copyright', 'category', 'pubDate')
+    // Image settings.
+    ->setImage('title', 'link', 'url');
 
-// Set values to channel.
-$channel->setCopyright('©nonz250');
-$channel->setImage($image);
-
-// Set channel to simpleRssMaker.
-$simpleRssMaker->setChannel($channel);
+foreach($items as $item) {
+    $simpleRssMaker = $simpleRssMaker
+        ->addItem('title', 'link', 'description', 'author', 'category', 'datetime');
+}
 
 // Generate RSS2.0 string.
 $xml = $simpleRssMaker->rss2();
