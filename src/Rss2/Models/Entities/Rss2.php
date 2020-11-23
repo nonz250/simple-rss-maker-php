@@ -71,6 +71,26 @@ final class Rss2
                 $image->addChild('link', (string)$this->channel->image()->link());
                 $image->addChild('url', (string)$this->channel->image()->url());
             }
+            $itemCollection = $this->channel->itemCollection();
+            /** @var Item $item */
+            foreach ($itemCollection as $item) {
+                $itemElement = $channel->addChild('item');
+                $itemElement->addChild('guid', (string)$item->guid());
+                $itemElement->addChild('title', (string)$item->title());
+                $itemElement->addChild('link', (string)$item->link());
+                if (!$item->description()->isEmpty()) {
+                    $itemElement->addChild('description', (string)$item->description());
+                }
+                if (!$item->author()->isEmpty()) {
+                    $itemElement->addChild('author', (string)$item->author());
+                }
+                if (!$item->category()->isEmpty()) {
+                    $itemElement->addChild('category', (string)$item->category());
+                }
+                if ($item->pubDate()) {
+                    $itemElement->addChild('pubDate', (string)$item->pubDate());
+                }
+            }
         }
 
         return $rss;

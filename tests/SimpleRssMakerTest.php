@@ -100,9 +100,6 @@ class SimpleRssMakerTest extends TestCase
         $simpleRssMaker->addItem(
             StrTestHelper::createRandomStr(),
             StrTestHelper::createRandomUrl(),
-            StrTestHelper::createRandomStr(),
-            StrTestHelper::createRandomStr(),
-            StrTestHelper::createRandomStr(),
         );
         $this->assertCount(2, $items);
     }
@@ -135,6 +132,7 @@ class SimpleRssMakerTest extends TestCase
             ->setChannel($title, $link, $description, $language, $copyright, $category, $pubDate)
             ->setImage($imageTitle, $imageLink, $imageUrl)
             ->addItem($itemTitle, $itemLink, $itemDescription, $itemAuthor, $itemCategory, $itemDate)
+            ->addItem($itemTitle, $itemLink)
             ->rss2();
         $expected = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -152,6 +150,20 @@ class SimpleRssMakerTest extends TestCase
       <link>{$imageLink}</link>
       <url>{$imageUrl}</url>
     </image>
+    <item>
+      <guid>{$itemLink}</guid>
+      <title>{$itemTitle}</title>
+      <link>{$itemLink}</link>
+      <description>{$itemDescription}</description>
+      <author>{$itemAuthor}</author>
+      <category>{$itemCategory}</category>
+      <pubDate>{$itemDate->format(DateTime::RFC822)}</pubDate>
+    </item>
+    <item>
+      <guid>{$itemLink}</guid>
+      <title>{$itemTitle}</title>
+      <link>{$itemLink}</link>
+    </item>
   </channel>
 </rss>
 
