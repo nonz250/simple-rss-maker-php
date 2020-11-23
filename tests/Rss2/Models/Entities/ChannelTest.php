@@ -7,12 +7,14 @@ use DateTime;
 use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\Entities\Item;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
+use SimpleRssMaker\Shared\Models\ValueObjects\Date;
 use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 use Tests\TestHelper\StrTestHelper;
 
@@ -59,7 +61,7 @@ class ChannelTest extends TestCase
     public function testSetLanguage(Channel $channel)
     {
         $expected = Language::LANGUAGE_ENGLISH;
-        $channel->setLanguage($expected);
+        $channel->setLanguage(new Language($expected));
         $this->assertEquals($expected, (string)$channel->language());
     }
 
@@ -70,7 +72,7 @@ class ChannelTest extends TestCase
     public function testSetCopyright(Channel $channel)
     {
         $expected = StrTestHelper::createRandomStr();
-        $channel->setCopyright($expected);
+        $channel->setCopyright(new Copyright($expected));
         $this->assertEquals($expected, (string)$channel->copyright());
     }
 
@@ -81,7 +83,7 @@ class ChannelTest extends TestCase
     public function testSetCategory(Channel $channel)
     {
         $expected = StrTestHelper::createRandomStr();
-        $channel->setCategory($expected);
+        $channel->setCategory(new Category($expected));
         $this->assertEquals($expected, (string)$channel->category());
     }
 
@@ -92,7 +94,7 @@ class ChannelTest extends TestCase
     public function testPubDate(Channel $channel)
     {
         $expected = new DateTime();
-        $channel->setPubDate($expected);
+        $channel->setPubDate(new Date($expected));
         $this->assertEquals($expected->format(DateTime::RFC822), (string)$channel->pubDate());
     }
 
@@ -111,5 +113,30 @@ class ChannelTest extends TestCase
         $this->assertEquals((string)$expected->title(), (string)$channel->image()->title());
         $this->assertEquals((string)$expected->link(), (string)$channel->image()->link());
         $this->assertEquals((string)$expected->url(), (string)$channel->image()->url());
+    }
+
+    /**
+     * @depends test__construct
+     * @param Channel $channel
+     */
+    public function testItemCollection(Channel $channel)
+    {
+        $url = StrTestHelper::createRandomUrl();
+        $title = StrTestHelper::createRandomStr();
+        $link = StrTestHelper::createRandomUrl();
+        $expected = new ItemCollection([
+            new Item(
+                new Url($url),
+                new Title($title),
+                new Url($link),
+                null,
+                null,
+                null,
+                null,
+            ),
+        ]);
+        $this->assertCount(0, $channel->itemCollection());
+        $channel->setItemCollection($expected);
+        $this->assertCount(1, $channel->itemCollection());
     }
 }

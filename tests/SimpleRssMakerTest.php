@@ -6,10 +6,13 @@ namespace Tests;
 use DateTime;
 use DateTimeZone;
 use Exception;
+use ReflectionClass;
+use ReflectionException;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\Entities\Image;
-use SimpleRssMaker\Rss2\Models\Entities\Item;
 use SimpleRssMaker\Shared\Exceptions\ChannelNotExistException;
+use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 use SimpleRssMaker\SimpleRssMaker;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\SimpleRssMakerInterface;
@@ -19,62 +22,89 @@ class SimpleRssMakerTest extends TestCase
 {
     public function test__construct()
     {
-        $simpleRSSMaker = new SimpleRssMaker();
-        $this->assertInstanceOf(SimpleRssMaker::class, $simpleRSSMaker);
-        return $simpleRSSMaker;
-    }
-
-    /**
-     * @depends test__construct
-     * @param SimpleRssMakerInterface $simpleRSSMaker
-     */
-    public function testException(SimpleRssMakerInterface $simpleRSSMaker)
-    {
-        $this->expectException(ChannelNotExistException::class);
-        $simpleRSSMaker->rss2();
-    }
-
-    /**
-     * @depends test__construct
-     * @param SimpleRssMakerInterface $simpleRSSMaker
-     */
-    public function testChannelFactory(SimpleRssMakerInterface $simpleRSSMaker)
-    {
-        $channel = $simpleRSSMaker->channelFactory(
-            StrTestHelper::createRandomStr(),
-            StrTestHelper::createRandomUrl(),
-            StrTestHelper::createRandomStr(),
-        );
-        $this->assertInstanceOf(Channel::class, $channel);
-        $simpleRSSMaker->setChannel($channel);
-        $this->assertIsString($simpleRSSMaker->rss2());
+        $simpleRssMaker = new SimpleRssMaker();
+        $this->assertInstanceOf(SimpleRssMaker::class, $simpleRssMaker);
+        return $simpleRssMaker;
     }
 
     /**
      * @depends test__construct
      * @param SimpleRssMakerInterface $simpleRssMaker
      */
-    public function testImageFactory(SimpleRssMakerInterface $simpleRssMaker)
+    public function testException(SimpleRssMakerInterface $simpleRssMaker)
     {
-        $image = $simpleRssMaker->imageFactory(
+        $this->expectException(ChannelNotExistException::class);
+        $simpleRssMaker->rss2();
+    }
+
+    /**
+     * @depends test__construct
+     * @param SimpleRssMakerInterface $simpleRssMaker
+     * @throws ReflectionException
+     */
+    public function testSetChannel(SimpleRssMakerInterface $simpleRssMaker)
+    {
+        $simpleRssMaker->setChannel(
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomUrl(),
+            StrTestHelper::createRandomStr(),
+        );
+        $ref = new ReflectionClass($simpleRssMaker);
+        $prop = $ref->getProperty('channel');
+        $prop->setAccessible(true);
+        /** @var Channel $channel */
+        $channel = $prop->getValue($simpleRssMaker);
+        $this->assertInstanceOf(Channel::class, $channel);
+    }
+
+    /**
+     * @depends test__construct
+     * @param SimpleRssMakerInterface $simpleRssMaker
+     * @throws ReflectionException
+     */
+    public function testSetImage(SimpleRssMakerInterface $simpleRssMaker)
+    {
+        $simpleRssMaker->setImage(
             StrTestHelper::createRandomStr(),
             StrTestHelper::createRandomUrl(),
             StrTestHelper::createRandomUrl(),
         );
+        $ref = new ReflectionClass($simpleRssMaker);
+        $prop = $ref->getProperty('image');
+        $prop->setAccessible(true);
+        /** @var Image $image */
+        $image = $prop->getValue($simpleRssMaker);
         $this->assertInstanceOf(Image::class, $image);
     }
 
     /**
      * @depends test__construct
      * @param SimpleRssMakerInterface $simpleRssMaker
+     * @throws ReflectionException
      */
-    public function testItemFactory(SimpleRssMakerInterface $simpleRssMaker)
+    public function testaddItem(SimpleRssMakerInterface $simpleRssMaker)
     {
-        $item = $simpleRssMaker->itemFactory(
+        $simpleRssMaker->addItem(
             StrTestHelper::createRandomStr(),
             StrTestHelper::createRandomUrl(),
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomStr(),
         );
-        $this->assertInstanceOf(Item::class, $item);
+        $ref = new ReflectionClass($simpleRssMaker);
+        $prop = $ref->getProperty('itemCollection');
+        $prop->setAccessible(true);
+        /** @var ItemCollection $items */
+        $items = $prop->getValue($simpleRssMaker);
+        $this->assertCount(1, $items);
+        $simpleRssMaker->addItem(
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomUrl(),
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomStr(),
+            StrTestHelper::createRandomStr(),
+        );
+        $this->assertCount(2, $items);
     }
 
     /**
@@ -87,26 +117,24 @@ class SimpleRssMakerTest extends TestCase
         $title = StrTestHelper::createRandomStr();
         $link = StrTestHelper::createRandomUrl();
         $description = StrTestHelper::createRandomStr();
+        $language = Language::LANGUAGE_JAPANESE;
         $copyright = StrTestHelper::createRandomStr();
         $pubDate = new DateTime('now', new DateTimeZone('UTC'));
         $category = StrTestHelper::createRandomStr();
         $imageTitle = StrTestHelper::createRandomStr();
         $imageLink = StrTestHelper::createRandomUrl();
         $imageUrl = StrTestHelper::createRandomUrl();
-        $channel = $simpleRSSMaker
-            ->channelFactory($title, $link, $description);
-
-        $channel->setCopyright($copyright);
-        $channel->setPubDate($pubDate);
-        $channel->setCategory($category);
-
-        $image = $simpleRSSMaker
-            ->imageFactory($imageTitle, $imageLink, $imageUrl);
-
-        $channel->setImage($image);
+        $itemTitle = StrTestHelper::createRandomStr();
+        $itemLink = StrTestHelper::createRandomUrl();
+        $itemDescription = StrTestHelper::createRandomStr();
+        $itemAuthor = StrTestHelper::createRandomStr();
+        $itemCategory = StrTestHelper::createRandomStr();
+        $itemDate = new DateTime('now', new DateTimeZone('UTC'));
 
         $rss2 = $simpleRSSMaker
-            ->setChannel($channel)
+            ->setChannel($title, $link, $description, $language, $copyright, $category, $pubDate)
+            ->setImage($imageTitle, $imageLink, $imageUrl)
+            ->addItem($itemTitle, $itemLink, $itemDescription, $itemAuthor, $itemCategory, $itemDate)
             ->rss2();
         $expected = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>

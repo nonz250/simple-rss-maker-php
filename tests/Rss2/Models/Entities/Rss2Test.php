@@ -9,6 +9,9 @@ use SimpleRssMaker\Rss2\Models\Entities\Rss2;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\Factories\ChannelFactory;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
+use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
+use SimpleRssMaker\Shared\Models\ValueObjects\Date;
 use SimpleRssMaker\Shared\Models\ValueObjects\RssVersion;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
@@ -82,7 +85,7 @@ class Rss2Test extends TestCase
             StrTestHelper::createRandomStr(),
         );
 
-        $channel->setCopyright(StrTestHelper::createRandomStr());
+        $channel->setCopyright(new Copyright(StrTestHelper::createRandomStr()));
 
         $rss2 = new Rss2($this->xmlVersion, $this->xmlEncoding, $this->rssVersion, $channel);
         $this->assertInstanceOf(Rss2::class, $rss2);
@@ -103,7 +106,7 @@ class Rss2Test extends TestCase
             StrTestHelper::createRandomStr(),
         );
 
-        $channel->setCategory(StrTestHelper::createRandomStr());
+        $channel->setCategory(new Category(StrTestHelper::createRandomStr()));
 
         $rss2 = new Rss2($this->xmlVersion, $this->xmlEncoding, $this->rssVersion, $channel);
         $this->assertInstanceOf(Rss2::class, $rss2);
@@ -124,7 +127,7 @@ class Rss2Test extends TestCase
             StrTestHelper::createRandomStr(),
         );
 
-        $channel->setPubDate(new DateTime());
+        $channel->setPubDate(new Date(new DateTime()));
 
         $rss2 = new Rss2($this->xmlVersion, $this->xmlEncoding, $this->rssVersion, $channel);
         $this->assertInstanceOf(Rss2::class, $rss2);

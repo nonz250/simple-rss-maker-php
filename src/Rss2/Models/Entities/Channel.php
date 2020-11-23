@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker\Rss2\Models\Entities;
 
-use DateTimeInterface;
 use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
@@ -122,33 +121,38 @@ final class Channel
         return $this->image;
     }
 
-    public function setLanguage(string $language): void
+    public function itemCollection(): ItemCollection
     {
-        $this->language = new Language($language);
+        return $this->itemCollection;
     }
 
-    public function setCopyright(string $copyright): void
+    public function setLanguage(Language $language): void
     {
-        $this->copyright = new Copyright($copyright);
+        $this->language = $language;
     }
 
-    public function setCategory(string $category): void
+    public function setCategory(Category $category): void
     {
-        $this->category = new Category($category);
+        $this->category = $category;
     }
 
-    public function setPubDate(DateTimeInterface $pubDate): void
+    public function setCopyright(Copyright $copyright): void
     {
-        $this->pubDate = new Date($pubDate);
+        $this->copyright = $copyright;
     }
 
-    public function setImage(Image $image): void
+    public function setImage(?Image $image): void
     {
         $this->image = $image;
     }
 
-    public function setItems(ItemCollection $itemCollection): void
+    public function setItemCollection(ItemCollection $itemCollection): void
     {
         $this->itemCollection = $itemCollection;
+    }
+
+    public function setPubDate(?Date $pubDate): void
+    {
+        $this->pubDate = $pubDate;
     }
 }

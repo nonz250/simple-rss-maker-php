@@ -24,4 +24,9 @@ final class ItemCollection extends Collection
         }
         $this->items = $items;
     }
+
+    public function push(Item $item)
+    {
+        $this->items[] = $item;
+    }
 }

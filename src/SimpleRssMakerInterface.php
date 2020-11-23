@@ -3,27 +3,35 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker;
 
-use SimpleRssMaker\Rss2\Models\Entities\Channel;
-use SimpleRssMaker\Rss2\Models\Entities\Image;
-use SimpleRssMaker\Rss2\Models\Entities\Item;
+use DateTimeInterface;
+use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 
 interface SimpleRssMakerInterface
 {
-    public function channelFactory(
+    public function setChannel(
         string $title,
         string $link,
-        string $description
-    ): Channel;
+        string $description,
+        string $language = Language::LANGUAGE_JAPANESE,
+        string $copyright = '',
+        string $category = '',
+        ?DateTimeInterface $pubDate = null
+    ): self;
 
-    public function setChannel(Channel $channel): self;
-
-    public function imageFactory(
+    public function setImage(
         string $title,
         string $link,
         string $url
-    ): Image;
+    ): self;
 
-    public function itemFactory(string $title, string $link): Item;
+    public function addItem(
+        string $title,
+        string $link,
+        string $description = '',
+        string $author = '',
+        string $category = '',
+        ?DateTimeInterface $pubDate = null
+    ): self;
 
     public function rss2(): string;
 }

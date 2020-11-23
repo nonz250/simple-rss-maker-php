@@ -3,16 +3,23 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker;
 
+use DateTimeInterface;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Input;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Output;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\Entities\Image;
-use SimpleRssMaker\Rss2\Models\Entities\Item;
 use SimpleRssMaker\Rss2\Models\Factories\ChannelFactory;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Rss2\Models\Factories\ItemFactory;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Author;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
 use SimpleRssMaker\Shared\Exceptions\ChannelNotExistException;
+use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
+use SimpleRssMaker\Shared\Models\ValueObjects\Date;
+use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
 
@@ -28,40 +35,72 @@ class SimpleRssMaker implements SimpleRssMakerInterface
      */
     private ?Channel $channel;
 
+    /**
+     * @var Image
+     */
+    private Image $image;
+
+    /**
+     * @var ItemCollection
+     */
+    private ItemCollection $itemCollection;
+
     public function __construct(string $xmlEncoding = XmlEncoding::UTF8)
     {
         $this->xmlEncoding = new XmlEncoding($xmlEncoding);
         $this->channel = null;
+        $this->itemCollection = new ItemCollection();
     }
 
-    public function channelFactory(
+    public function setChannel(
         string $title,
         string $link,
-        string $description
-    ): Channel {
+        string $description,
+        string $language = Language::LANGUAGE_JAPANESE,
+        string $copyright = '',
+        string $category = '',
+        ?DateTimeInterface $pubDate = null
+    ): SimpleRssMakerInterface {
         $factory = new ChannelFactory();
-        return $factory->newChannel($title, $link, $description);
-    }
-
-    public function setChannel(Channel $channel): SimpleRssMakerInterface
-    {
+        $channel = $factory->newChannel($title, $link, $description);
+        $channel->setLanguage(new Language($language));
+        $channel->setCategory(new Category($category));
+        $channel->setCopyright(new Copyright($copyright));
+        if ($pubDate) {
+            $channel->setPubDate(new Date($pubDate));
+        }
         $this->channel = $channel;
         return $this;
     }
 
-    public function imageFactory(
+    public function setImage(
         string $title,
         string $link,
         string $url
-    ): Image {
+    ): self {
         $factory = new ImageFactory();
-        return $factory->newImage($title, $link, $url);
+        $this->image = $factory->newImage($title, $link, $url);
+        return $this;
     }
 
-    public function itemFactory(string $title, string $link): Item
-    {
+    public function addItem(
+        string $title,
+        string $link,
+        string $description = '',
+        string $author = '',
+        string $category = '',
+        ?DateTimeInterface $pubDate = null
+    ): self {
         $factory = new ItemFactory();
-        return $factory->newItem($title, $link);
+        $item = $factory->newItem($title, $link);
+        $item->setDescription(new Description($description));
+        $item->setAuthor(new Author($author));
+        $item->setCategory(new Category($category));
+        if ($pubDate) {
+            $item->setPubDate(new Date($pubDate));
+        }
+        $this->itemCollection->push($item);
+        return $this;
     }
 
     public function rss2(): string
@@ -71,6 +110,10 @@ class SimpleRssMaker implements SimpleRssMakerInterface
                 'Channel is required. Use `channelFactory` and `setChannel` methods to set channel.'
             );
         }
+
+        $this->channel->setImage($this->image);
+        $this->channel->setItemCollection($this->itemCollection);
+
         $input = new CreateRss2Input(
             new XmlVersion(XmlVersion::VERSION_1),
             $this->xmlEncoding,
