@@ -1,6 +1,7 @@
 {
     "name": "nonz250/simple-rss-maker-php",
     "description": "This package allows you to create RSS easily.",
+    "keywords": ["php", "rss", "simple"],
     "type": "library",
     "license": "MIT",
     "authors": [
