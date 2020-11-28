@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\Entities;
 
-use SimpleRssMaker\Rss2\Models\Entities\Image;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
+use SimpleRssMaker\Shared\Models\Entities\Image;
 use Tests\TestHelper\StrTestHelper;
 
 class ImageTest extends TestCase

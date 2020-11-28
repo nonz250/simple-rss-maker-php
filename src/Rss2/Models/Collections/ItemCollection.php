@@ -5,7 +5,7 @@ namespace SimpleRssMaker\Rss2\Models\Collections;
 
 use InvalidArgumentException;
 use SimpleRssMaker\Foundation\Collection;
-use SimpleRssMaker\Rss2\Models\Entities\Item;
+use SimpleRssMaker\Shared\Models\Entities\Item;
 
 final class ItemCollection extends Collection
 {

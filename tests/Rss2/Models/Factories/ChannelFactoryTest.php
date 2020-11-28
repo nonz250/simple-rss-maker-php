@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\Factories;
 
-use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use SimpleRssMaker\Rss2\Models\Factories\ChannelFactory;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Shared\Models\Entities\Channel;
 use Tests\TestHelper\StrTestHelper;
 
 class ChannelFactoryTest extends TestCase

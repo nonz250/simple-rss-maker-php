@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker\Rss2\Models\Factories;
 
-use SimpleRssMaker\Rss2\Models\Entities\Image;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
+use SimpleRssMaker\Shared\Models\Entities\Image;
 
 class ImageFactory implements ImageFactoryInterface
 {

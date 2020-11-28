@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\Factories;
 
-use SimpleRssMaker\Rss2\Models\Entities\Image;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Shared\Models\Entities\Image;
 use Tests\TestHelper\StrTestHelper;
 
 class ImageFactoryTest extends TestCase

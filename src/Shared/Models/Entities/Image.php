@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SimpleRssMaker\Rss2\Models\Entities;
+namespace SimpleRssMaker\Shared\Models\Entities;
 
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;

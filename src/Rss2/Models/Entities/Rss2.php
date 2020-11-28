@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace SimpleRssMaker\Rss2\Models\Entities;
 
 use DOMDocument;
+use SimpleRssMaker\Shared\Models\Entities\Channel;
 use SimpleRssMaker\Shared\Models\ValueObjects\RssVersion;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;

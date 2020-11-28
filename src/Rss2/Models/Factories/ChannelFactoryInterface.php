@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker\Rss2\Models\Factories;
 
-use SimpleRssMaker\Rss2\Models\Entities\Channel;
+use SimpleRssMaker\Shared\Models\Entities\Channel;
 
 interface ChannelFactoryInterface
 {

@@ -7,9 +7,9 @@ use Exception;
 use InvalidArgumentException;
 use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use PHPUnit\Framework\TestCase;
-use SimpleRssMaker\Rss2\Models\Entities\Item;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
+use SimpleRssMaker\Shared\Models\Entities\Item;
 use Tests\TestHelper\StrTestHelper;
 
 class ItemCollectionTest extends TestCase

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker\Rss2\Command\UseCases;
 
-use SimpleRssMaker\Rss2\Models\Entities\Channel;
+use SimpleRssMaker\Shared\Models\Entities\Channel;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
 

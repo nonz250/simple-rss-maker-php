@@ -5,14 +5,14 @@ namespace Tests\Rss2\Models\Entities;
 
 use DateTime;
 use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
-use SimpleRssMaker\Rss2\Models\Entities\Channel;
 use PHPUnit\Framework\TestCase;
-use SimpleRssMaker\Rss2\Models\Entities\Item;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
+use SimpleRssMaker\Shared\Models\Entities\Channel;
+use SimpleRssMaker\Shared\Models\Entities\Item;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
 use SimpleRssMaker\Shared\Models\ValueObjects\Date;
 use SimpleRssMaker\Shared\Models\ValueObjects\Language;

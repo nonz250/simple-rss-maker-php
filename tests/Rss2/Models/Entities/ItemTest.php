@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace Tests\Rss2\Models\Entities;
 
 use DateTime;
-use SimpleRssMaker\Rss2\Models\Entities\Item;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Author;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
+use SimpleRssMaker\Shared\Models\Entities\Item;
 use SimpleRssMaker\Shared\Models\ValueObjects\Date;
 use Tests\TestHelper\StrTestHelper;
 
