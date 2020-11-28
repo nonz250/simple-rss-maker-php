@@ -4,6 +4,10 @@ setup:
 	docker-compose build && \
 	docker-compose run --rm composer setup
 
+.PHONY: up
+up:
+	docker-compose up -d php
+
 .PHONY: test
 test:
 	docker-compose exec php php -version && \
