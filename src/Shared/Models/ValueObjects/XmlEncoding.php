@@ -8,5 +8,6 @@ use SimpleRssMaker\Foundation\ValueObjects\Enum;
 final class XmlEncoding extends Enum
 {
     public const UTF8 = 'UTF-8';
+
     public const UTF16 = 'UTF-16';
 }

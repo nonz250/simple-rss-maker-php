@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\Factories;
 
-use SimpleRssMaker\Rss2\Models\Factories\ItemFactory;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\Factories\ItemFactory;
 use SimpleRssMaker\Shared\Models\Entities\Item;
 use Tests\TestHelper\StrTestHelper;
 
-class ItemFactoryTest extends TestCase
+final class ItemFactoryTest extends TestCase
 {
     public function testNewFactory()
     {

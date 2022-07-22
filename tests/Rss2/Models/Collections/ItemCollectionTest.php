@@ -5,14 +5,14 @@ namespace Tests\Rss2\Models\Collections;
 
 use Exception;
 use InvalidArgumentException;
-use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Shared\Models\Entities\Item;
 use Tests\TestHelper\StrTestHelper;
 
-class ItemCollectionTest extends TestCase
+final class ItemCollectionTest extends TestCase
 {
     /**
      * @var array
@@ -23,6 +23,7 @@ class ItemCollectionTest extends TestCase
     {
         parent::setUp();
         $num = 10;
+
         for ($i = 0; $i < $num; $i++) {
             $this->array[] = new Item(
                 new Url(StrTestHelper::createRandomUrl()),
@@ -38,9 +39,10 @@ class ItemCollectionTest extends TestCase
 
     /**
      * @throws Exception
+     *
      * @return ItemCollection
      */
-    public function test__construct()
+    public function test__construct(): ItemCollection
     {
         $items = new ItemCollection($this->array);
         $this->assertInstanceOf(ItemCollection::class, $items);
@@ -50,7 +52,7 @@ class ItemCollectionTest extends TestCase
         return $items;
     }
 
-    public function testException()
+    public function testException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         new ItemCollection(['unknown']);
@@ -58,9 +60,10 @@ class ItemCollectionTest extends TestCase
 
     /**
      * @depends test__construct
+     *
      * @param ItemCollection $itemCollection
      */
-    public function testPush(ItemCollection $itemCollection)
+    public function testPush(ItemCollection $itemCollection): void
     {
         $this->assertCount(count($this->array), $itemCollection);
         $itemCollection->push(new Item(

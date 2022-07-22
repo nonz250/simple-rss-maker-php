@@ -3,21 +3,21 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\ValueObjects;
 
-use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use Tests\TestHelper\StrTestHelper;
 
-class CategoryTest extends TestCase
+final class CategoryTest extends TestCase
 {
-    public function test__construct()
+    public function test__construct(): void
     {
         $expected = StrTestHelper::createRandomStr();
         $category = new Category($expected);
         $this->assertInstanceOf(Category::class, $category);
-        $this->assertEquals($expected, $category);
+        $this->assertSame($expected, (string)$category);
     }
 
-    public function testIsEmpty()
+    public function testIsEmpty(): void
     {
         $category = new Category('');
         $this->assertTrue($category->isEmpty());

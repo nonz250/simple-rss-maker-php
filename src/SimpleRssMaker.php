@@ -23,7 +23,7 @@ use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
 
-class SimpleRssMaker implements SimpleRssMakerInterface
+final class SimpleRssMaker implements SimpleRssMakerInterface
 {
     /**
      * @var XmlEncoding
@@ -66,6 +66,7 @@ class SimpleRssMaker implements SimpleRssMakerInterface
         $channel->setLanguage(new Language($language));
         $channel->setCategory(new Category($category));
         $channel->setCopyright(new Copyright($copyright));
+
         if ($pubDate) {
             $channel->setPubDate(new Date($pubDate));
         }
@@ -96,6 +97,7 @@ class SimpleRssMaker implements SimpleRssMakerInterface
         $item->setDescription(new Description($description));
         $item->setAuthor(new Author($author));
         $item->setCategory(new Category($category));
+
         if ($pubDate) {
             $item->setPubDate(new Date($pubDate));
         }

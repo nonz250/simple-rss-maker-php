@@ -6,7 +6,9 @@ namespace Tests\TestHelper;
 final class StrTestHelper
 {
     private const DEFAULT_LENGTH = 256;
+
     private const MIN_DOMAIN_LABEL_LENGTH = 1;
+
     private const MAX_DOMAIN_LABEL_LENGTH = 63;
 
     public static function createRandomStr(
@@ -14,6 +16,7 @@ final class StrTestHelper
         string $chars = '1234567890abcdefghijklmnopqrstuvwxyz'
     ): string {
         $result = '';
+
         for ($i = 0; $i < $length; $i++) {
             $result .= mb_substr($chars, mt_rand(0, mb_strlen($chars) - 1), 1);
         }

@@ -5,6 +5,6 @@ namespace SimpleRssMaker\Shared\Exceptions;
 
 use LogicException;
 
-class LinkFormatException extends LogicException
+final class LinkFormatException extends LogicException
 {
 }

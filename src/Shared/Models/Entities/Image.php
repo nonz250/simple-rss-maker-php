@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker\Shared\Models\Entities;
 
-use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 
 final class Image
 {

@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Tests\Foundation\Helpers\Rules;
 
-use SimpleRssMaker\Foundation\Helpers\Rules\UriRule;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Foundation\Helpers\Rules\UriRule;
 
-class UriRuleTest extends TestCase
+final class UriRuleTest extends TestCase
 {
-    public function testIsValidUrlScheme()
+    public function testIsValidUrlScheme(): void
     {
         $result = UriRule::isValidUrlScheme('mailto:hosaka.non.work@gmail.com');
         $this->assertFalse($result);
@@ -33,7 +33,7 @@ class UriRuleTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testIsValidHttp()
+    public function testIsValidHttp(): void
     {
         $result = UriRule::isValidHttp('http://labo.nozomi.bike');
         $this->assertTrue($result);
@@ -41,7 +41,7 @@ class UriRuleTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testIsValidHttps()
+    public function testIsValidHttps(): void
     {
         $result = UriRule::isValidHttps('http://labo.nozomi.bike');
         $this->assertFalse($result);

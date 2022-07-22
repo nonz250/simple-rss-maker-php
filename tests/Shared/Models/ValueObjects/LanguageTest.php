@@ -4,33 +4,33 @@ declare(strict_types=1);
 namespace Tests\Shared\Models\ValueObjects;
 
 use InvalidArgumentException;
-use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 
-class LanguageTest extends TestCase
+final class LanguageTest extends TestCase
 {
-    public function testCreateJapanese()
+    public function testCreateJapanese(): void
     {
         $language = new Language(Language::LANGUAGE_JAPANESE);
-        $this->assertEquals(Language::LANGUAGE_JAPANESE, $language->value());
-        $this->assertEquals(Language::LANGUAGE_JAPANESE, (string)$language);
+        $this->assertSame(Language::LANGUAGE_JAPANESE, $language->value());
+        $this->assertSame(Language::LANGUAGE_JAPANESE, (string)$language);
     }
 
-    public function testCreateEnglish()
+    public function testCreateEnglish(): void
     {
         $language = new Language(Language::LANGUAGE_ENGLISH);
-        $this->assertEquals(Language::LANGUAGE_ENGLISH, $language->value());
-        $this->assertEquals(Language::LANGUAGE_ENGLISH, (string)$language);
+        $this->assertSame(Language::LANGUAGE_ENGLISH, $language->value());
+        $this->assertSame(Language::LANGUAGE_ENGLISH, (string)$language);
     }
 
-    public function testCreateEnglishUs()
+    public function testCreateEnglishUs(): void
     {
         $language = new Language(Language::LANGUAGE_ENGLISH_US);
-        $this->assertEquals(Language::LANGUAGE_ENGLISH_US, $language->value());
-        $this->assertEquals(Language::LANGUAGE_ENGLISH_US, (string)$language);
+        $this->assertSame(Language::LANGUAGE_ENGLISH_US, $language->value());
+        $this->assertSame(Language::LANGUAGE_ENGLISH_US, (string)$language);
     }
 
-    public function testException()
+    public function testException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         new Language('unknown');

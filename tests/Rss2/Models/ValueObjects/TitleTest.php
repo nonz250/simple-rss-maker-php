@@ -3,22 +3,22 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\ValueObjects;
 
-use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use Tests\TestHelper\StrTestHelper;
 
-class TitleTest extends TestCase
+final class TitleTest extends TestCase
 {
     public function test__construct()
     {
         $expected = StrTestHelper::createRandomStr();
         $title = new Title($expected);
         $this->assertInstanceOf(Title::class, $title);
-        $this->assertEquals($expected, (string)$title);
+        $this->assertSame($expected, (string)$title);
         return $title;
     }
 
-    public function testIsEmpty()
+    public function testIsEmpty(): void
     {
         $title = new Title('');
         $this->assertTrue($title->isEmpty());

@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\Entities;
 
-use DateTime;
 use DOMDocument;
-use SimpleRssMaker\Rss2\Models\Entities\Rss2;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\Entities\Rss2;
 use SimpleRssMaker\Rss2\Models\Factories\ChannelFactory;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
@@ -17,10 +16,12 @@ use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
 use Tests\TestHelper\StrTestHelper;
 
-class Rss2Test extends TestCase
+final class Rss2Test extends TestCase
 {
     private XmlVersion $xmlVersion;
+
     private XmlEncoding $xmlEncoding;
+
     private RssVersion $rssVersion;
 
     protected function setUp(): void
@@ -76,7 +77,7 @@ class Rss2Test extends TestCase
         return $rss2;
     }
 
-    public function testCopyrightValue()
+    public function testCopyrightValue(): void
     {
         $factory = new ChannelFactory();
         $channel = $factory->newChannel(
@@ -97,7 +98,7 @@ class Rss2Test extends TestCase
         $this->assertCount(1, $copyright);
     }
 
-    public function testCategoryValue()
+    public function testCategoryValue(): void
     {
         $factory = new ChannelFactory();
         $channel = $factory->newChannel(
@@ -118,7 +119,7 @@ class Rss2Test extends TestCase
         $this->assertCount(1, $category);
     }
 
-    public function testPubDateValue()
+    public function testPubDateValue(): void
     {
         $factory = new ChannelFactory();
         $channel = $factory->newChannel(
@@ -127,7 +128,7 @@ class Rss2Test extends TestCase
             StrTestHelper::createRandomStr(),
         );
 
-        $channel->setPubDate(new Date(new DateTime()));
+        $channel->setPubDate(new Date(new \DateTimeImmutable()));
 
         $rss2 = new Rss2($this->xmlVersion, $this->xmlEncoding, $this->rssVersion, $channel);
         $this->assertInstanceOf(Rss2::class, $rss2);
@@ -139,7 +140,7 @@ class Rss2Test extends TestCase
         $this->assertCount(1, $pubDate);
     }
 
-    public function testImageTags()
+    public function testImageTags(): void
     {
         $channelFactory = new ChannelFactory();
         $channel = $channelFactory->newChannel(

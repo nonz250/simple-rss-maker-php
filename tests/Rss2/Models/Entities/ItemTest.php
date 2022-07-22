@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Models\Entities;
 
-use DateTime;
 use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Author;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
@@ -14,9 +13,9 @@ use SimpleRssMaker\Shared\Models\Entities\Item;
 use SimpleRssMaker\Shared\Models\ValueObjects\Date;
 use Tests\TestHelper\StrTestHelper;
 
-class ItemTest extends TestCase
+final class ItemTest extends TestCase
 {
-    public function test__construct()
+    public function test__construct(): Item
     {
         $guid = new Url(StrTestHelper::createRandomUrl());
         $title = new Title(StrTestHelper::createRandomStr());
@@ -35,9 +34,9 @@ class ItemTest extends TestCase
             $pubDate,
         );
         $this->assertInstanceOf(Item::class, $item);
-        $this->assertEquals($guid, (string)$item->guid());
-        $this->assertEquals($title, (string)$item->title());
-        $this->assertEquals($link, (string)$item->link());
+        $this->assertSame((string)$guid, (string)$item->guid());
+        $this->assertSame((string)$title, (string)$item->title());
+        $this->assertSame((string)$link, (string)$item->link());
         $this->assertNull($item->description());
         $this->assertNull($item->author());
         $this->assertNull($item->category());
@@ -48,45 +47,49 @@ class ItemTest extends TestCase
 
     /**
      * @depends test__construct
+     *
      * @param Item $item
      */
-    public function testSetDescription(Item $item)
+    public function testSetDescription(Item $item): void
     {
         $description = new Description(StrTestHelper::createRandomStr());
         $item->setDescription($description);
-        $this->assertEquals((string)$description, (string)$item->description());
+        $this->assertSame((string)$description, (string)$item->description());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Item $item
      */
-    public function testSetAuthor(Item $item)
+    public function testSetAuthor(Item $item): void
     {
         $author = new Author(StrTestHelper::createRandomStr());
         $item->setAuthor($author);
-        $this->assertEquals((string)$author, (string)$item->author());
+        $this->assertSame((string)$author, (string)$item->author());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Item $item
      */
-    public function testSetCategory(Item $item)
+    public function testSetCategory(Item $item): void
     {
         $category = new Category(StrTestHelper::createRandomStr());
         $item->setCategory($category);
-        $this->assertEquals((string)$category, (string)$item->category());
+        $this->assertSame((string)$category, (string)$item->category());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Item $item
      */
-    public function testSetPubFate(Item $item)
+    public function testSetPubFate(Item $item): void
     {
-        $pubDate = new Date(new DateTime());
+        $pubDate = new Date(new \DateTimeImmutable());
         $item->setPubDate($pubDate);
-        $this->assertEquals((string)$pubDate, (string)$item->pubDate());
+        $this->assertSame((string)$pubDate, (string)$item->pubDate());
     }
 }

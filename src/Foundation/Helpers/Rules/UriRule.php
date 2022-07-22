@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace SimpleRssMaker\Foundation\Helpers\Rules;
 
-class UriRule
+final class UriRule
 {
     public static function isValidUrlScheme(string $value): bool
     {

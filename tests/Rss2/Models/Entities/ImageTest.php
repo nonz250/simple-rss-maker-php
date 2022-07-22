@@ -9,7 +9,7 @@ use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Shared\Models\Entities\Image;
 use Tests\TestHelper\StrTestHelper;
 
-class ImageTest extends TestCase
+final class ImageTest extends TestCase
 {
     public function test_construct()
     {
@@ -18,9 +18,9 @@ class ImageTest extends TestCase
         $url = new Url(StrTestHelper::createRandomUrl());
         $image = new Image($title, $link, $url);
         $this->assertInstanceOf(Image::class, $image);
-        $this->assertEquals((string)$title, (string)$image->title());
-        $this->assertEquals((string)$link, (string)$image->link());
-        $this->assertEquals((string)$url, (string)$image->url());
+        $this->assertSame((string)$title, (string)$image->title());
+        $this->assertSame((string)$link, (string)$image->link());
+        $this->assertSame((string)$url, (string)$image->url());
         return $image;
     }
 }

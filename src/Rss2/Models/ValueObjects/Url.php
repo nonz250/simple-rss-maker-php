@@ -11,17 +11,18 @@ use SimpleRssMaker\Shared\Exceptions\StrLengthException;
 final class Url extends StringBaseValue
 {
     /**
-     * Maximum character length of URLs when using IE
+     * Maximum character length of URLs when using IE.
      */
     public const MAX_LENGTH = 2083;
 
     public function __construct(string $value)
     {
         if (!UriRule::isValidHttp($value)) {
-            throw new LinkFormatException(sprintf('%s must start at https:// or http://', get_class()));
+            throw new LinkFormatException(sprintf('%s must start at https:// or http://', __CLASS__));
         }
+
         if (mb_strlen($value) > self::MAX_LENGTH) {
-            throw new StrLengthException(sprintf('%s must be less than %s chars.', get_class(), self::MAX_LENGTH));
+            throw new StrLengthException(sprintf('%s must be less than %s chars.', __CLASS__, self::MAX_LENGTH));
         }
         $this->value = $value;
     }

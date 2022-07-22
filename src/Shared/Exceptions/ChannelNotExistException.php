@@ -5,6 +5,6 @@ namespace SimpleRssMaker\Shared\Exceptions;
 
 use LogicException;
 
-class ChannelNotExistException extends LogicException
+final class ChannelNotExistException extends LogicException
 {
 }

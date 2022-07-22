@@ -1,5 +1,5 @@
 # see https://github.com/ucan-lab/docker-laravel5/blob/master/docker/php/Dockerfile
-FROM php:7.4.9-fpm-alpine
+FROM php:8.0-fpm-alpine
 
 ARG PSYSH_DIR=/usr/local/share/psysh
 ARG PHP_MANUAL_URL=http://psysh.org/manual/ja/php_manual.sqlite
@@ -36,7 +36,7 @@ RUN set -eux && \
     docker-php-ext-enable xdebug && \
     mkdir $PSYSH_DIR && wget $PHP_MANUAL_URL -P $PSYSH_DIR
 
-RUN curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fixer && \
+RUN curl -L https://cs.symfony.com/download/php-cs-fixer-v3.phar -o php-cs-fixer && \
     chmod a+x php-cs-fixer && \
     mv php-cs-fixer /usr/local/bin/php-cs-fixer
 

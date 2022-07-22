@@ -12,7 +12,7 @@ use SimpleXMLElement;
 
 final class Rss2
 {
-    protected const RSS_TAG = 'rss';
+    private const RSS_TAG = 'rss';
 
     /**
      * @var XmlVersion
@@ -46,6 +46,13 @@ final class Rss2
         $this->channel = $channel;
     }
 
+    public function __toString(): string
+    {
+        $dom = dom_import_simplexml($this->createSimpleXmlElement())->ownerDocument;
+        $dom->formatOutput = true;
+        return $dom->saveXML();
+    }
+
     public function createSimpleXmlElement(): SimpleXMLElement
     {
         $rss = $this->createRssElement();
@@ -57,15 +64,19 @@ final class Rss2
             $channel->addChild('link', (string)$this->channel->link());
             $channel->addChild('description', (string)$this->channel->description());
             $channel->addChild('language', (string)$this->channel->language());
+
             if (!$this->channel->copyright()->isEmpty()) {
                 $channel->addChild('copyright', (string)$this->channel->copyright());
             }
+
             if ($this->channel->pubDate()) {
                 $channel->addChild('pubDate', (string)$this->channel->pubDate());
             }
+
             if (!$this->channel->category()->isEmpty()) {
                 $channel->addChild('category', (string)$this->channel->category());
             }
+
             if ($this->channel->image()) {
                 $image = $channel->addChild('image');
                 $image->addChild('title', (string)$this->channel->image()->title());
@@ -79,15 +90,19 @@ final class Rss2
                 $itemElement->addChild('guid', (string)$item->guid());
                 $itemElement->addChild('title', (string)$item->title());
                 $itemElement->addChild('link', (string)$item->link());
+
                 if (!$item->description()->isEmpty()) {
                     $itemElement->addChild('description', (string)$item->description());
                 }
+
                 if (!$item->author()->isEmpty()) {
                     $itemElement->addChild('author', (string)$item->author());
                 }
+
                 if (!$item->category()->isEmpty()) {
                     $itemElement->addChild('category', (string)$item->category());
                 }
+
                 if ($item->pubDate()) {
                     $itemElement->addChild('pubDate', (string)$item->pubDate());
                 }
@@ -95,13 +110,6 @@ final class Rss2
         }
 
         return $rss;
-    }
-
-    public function __toString(): string
-    {
-        $dom = dom_import_simplexml($this->createSimpleXmlElement())->ownerDocument;
-        $dom->formatOutput = true;
-        return $dom->saveXML();
     }
 
     private function createRssElement(): SimpleXMLElement

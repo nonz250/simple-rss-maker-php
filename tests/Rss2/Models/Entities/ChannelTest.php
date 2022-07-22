@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace Tests\Rss2\Models\Entities;
 
 use DateTime;
-use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Factories\ImageFactory;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
-use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Shared\Models\Entities\Channel;
 use SimpleRssMaker\Shared\Models\Entities\Item;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
@@ -18,7 +18,7 @@ use SimpleRssMaker\Shared\Models\ValueObjects\Date;
 use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 use Tests\TestHelper\StrTestHelper;
 
-class ChannelTest extends TestCase
+final class ChannelTest extends TestCase
 {
     public function test__construct()
     {
@@ -43,66 +43,71 @@ class ChannelTest extends TestCase
             $items
         );
         $this->assertInstanceOf(Channel::class, $channel);
-        $this->assertEquals($title, $channel->title());
-        $this->assertEquals($link, $channel->link());
-        $this->assertEquals($description, $channel->description());
-        $this->assertEquals($language, $channel->language());
-        $this->assertEquals($copyright, $channel->copyright());
-        $this->assertEquals($category, $channel->category());
-        $this->assertEquals($pubDate, $channel->pubDate());
-        $this->assertEquals($image, $channel->image());
+        $this->assertSame($title, $channel->title());
+        $this->assertSame($link, $channel->link());
+        $this->assertSame($description, $channel->description());
+        $this->assertSame($language, $channel->language());
+        $this->assertSame($copyright, $channel->copyright());
+        $this->assertSame($category, $channel->category());
+        $this->assertSame($pubDate, $channel->pubDate());
+        $this->assertSame($image, $channel->image());
         return $channel;
     }
 
     /**
      * @depends test__construct
+     *
      * @param Channel $channel
      */
-    public function testSetLanguage(Channel $channel)
+    public function testSetLanguage(Channel $channel): void
     {
         $expected = Language::LANGUAGE_ENGLISH;
         $channel->setLanguage(new Language($expected));
-        $this->assertEquals($expected, (string)$channel->language());
+        $this->assertSame($expected, (string)$channel->language());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Channel $channel
      */
-    public function testSetCopyright(Channel $channel)
+    public function testSetCopyright(Channel $channel): void
     {
         $expected = StrTestHelper::createRandomStr();
         $channel->setCopyright(new Copyright($expected));
-        $this->assertEquals($expected, (string)$channel->copyright());
+        $this->assertSame($expected, (string)$channel->copyright());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Channel $channel
      */
-    public function testSetCategory(Channel $channel)
+    public function testSetCategory(Channel $channel): void
     {
         $expected = StrTestHelper::createRandomStr();
         $channel->setCategory(new Category($expected));
-        $this->assertEquals($expected, (string)$channel->category());
+        $this->assertSame($expected, (string)$channel->category());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Channel $channel
      */
-    public function testPubDate(Channel $channel)
+    public function testPubDate(Channel $channel): void
     {
-        $expected = new DateTime();
+        $expected = new \DateTimeImmutable();
         $channel->setPubDate(new Date($expected));
-        $this->assertEquals($expected->format(DateTime::RFC822), (string)$channel->pubDate());
+        $this->assertSame($expected->format(DateTime::RFC822), (string)$channel->pubDate());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Channel $channel
      */
-    public function testImage(Channel $channel)
+    public function testImage(Channel $channel): void
     {
         $expected = (new ImageFactory())->newImage(
             StrTestHelper::createRandomStr(),
@@ -110,16 +115,17 @@ class ChannelTest extends TestCase
             StrTestHelper::createRandomUrl(),
         );
         $channel->setImage($expected);
-        $this->assertEquals((string)$expected->title(), (string)$channel->image()->title());
-        $this->assertEquals((string)$expected->link(), (string)$channel->image()->link());
-        $this->assertEquals((string)$expected->url(), (string)$channel->image()->url());
+        $this->assertSame((string)$expected->title(), (string)$channel->image()->title());
+        $this->assertSame((string)$expected->link(), (string)$channel->image()->link());
+        $this->assertSame((string)$expected->url(), (string)$channel->image()->url());
     }
 
     /**
      * @depends test__construct
+     *
      * @param Channel $channel
      */
-    public function testItemCollection(Channel $channel)
+    public function testItemCollection(Channel $channel): void
     {
         $url = StrTestHelper::createRandomUrl();
         $title = StrTestHelper::createRandomStr();

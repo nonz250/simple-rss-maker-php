@@ -3,19 +3,18 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Command\UseCases;
 
-use DateTime;
 use DateTimeZone;
 use Exception;
-use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Input;
 use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Output;
 use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
 use SimpleRssMaker\Rss2\Models\Entities\Rss2;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Category;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Description;
-use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
+use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Shared\Models\Entities\Channel;
 use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
 use SimpleRssMaker\Shared\Models\ValueObjects\Date;
@@ -24,12 +23,12 @@ use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
 use Tests\TestHelper\StrTestHelper;
 
-class CreateRss2Test extends TestCase
+final class CreateRss2Test extends TestCase
 {
     /**
      * @throws Exception
      */
-    public function testProcess()
+    public function testProcess(): void
     {
         $input = new CreateRss2Input(
             new XmlVersion(XmlVersion::VERSION_1),
@@ -41,7 +40,7 @@ class CreateRss2Test extends TestCase
                 new Language(Language::LANGUAGE_JAPANESE),
                 new Copyright(StrTestHelper::createRandomStr()),
                 new Category(StrTestHelper::createRandomStr()),
-                new Date(new DateTime('now', new DateTimeZone('UTC'))),
+                new Date(new \DateTimeImmutable('now', new DateTimeZone('UTC'))),
                 null,
                 new ItemCollection()
             ),

@@ -16,7 +16,7 @@ final class ItemCollection extends Collection
                 throw new InvalidArgumentException(
                     sprintf(
                         '%s\'s Item must be %s type.',
-                        get_class(),
+                        __CLASS__,
                         Item::class
                     )
                 );
@@ -25,7 +25,7 @@ final class ItemCollection extends Collection
         $this->items = $items;
     }
 
-    public function push(Item $item)
+    public function push(Item $item): void
     {
         $this->items[] = $item;
     }

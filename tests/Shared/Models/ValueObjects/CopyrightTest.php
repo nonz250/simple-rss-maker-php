@@ -3,21 +3,21 @@ declare(strict_types=1);
 
 namespace Tests\Shared\Models\ValueObjects;
 
-use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Shared\Models\ValueObjects\Copyright;
 use Tests\TestHelper\StrTestHelper;
 
-class CopyrightTest extends TestCase
+final class CopyrightTest extends TestCase
 {
-    public function test__construct()
+    public function test__construct(): void
     {
         $expected = StrTestHelper::createRandomStr();
         $copyright = new Copyright($expected);
         $this->assertInstanceOf(Copyright::class, $copyright);
-        $this->assertEquals($expected, (string)$copyright);
+        $this->assertSame($expected, (string)$copyright);
     }
 
-    public function testIsEmpty()
+    public function testIsEmpty(): void
     {
         $copyright = new Copyright('');
         $this->assertTrue($copyright->isEmpty());

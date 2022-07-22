@@ -4,26 +4,26 @@ declare(strict_types=1);
 namespace Tests\Shared\Models\ValueObjects;
 
 use InvalidArgumentException;
-use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 
-class XmlEncodingTest extends TestCase
+final class XmlEncodingTest extends TestCase
 {
-    public function testCreateUtf8()
+    public function testCreateUtf8(): void
     {
         $encoding = new XmlEncoding(XmlEncoding::UTF8);
-        $this->assertEquals(XmlEncoding::UTF8, $encoding->value());
-        $this->assertEquals(XmlEncoding::UTF8, (string)$encoding);
+        $this->assertSame(XmlEncoding::UTF8, $encoding->value());
+        $this->assertSame(XmlEncoding::UTF8, (string)$encoding);
     }
 
-    public function testCreateUtf16()
+    public function testCreateUtf16(): void
     {
         $encoding = new XmlEncoding(XmlEncoding::UTF16);
-        $this->assertEquals(XmlEncoding::UTF16, $encoding->value());
-        $this->assertEquals(XmlEncoding::UTF16, (string)$encoding);
+        $this->assertSame(XmlEncoding::UTF16, $encoding->value());
+        $this->assertSame(XmlEncoding::UTF16, (string)$encoding);
     }
 
-    public function testException()
+    public function testException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         new XmlEncoding('unknown');

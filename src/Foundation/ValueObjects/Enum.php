@@ -14,11 +14,12 @@ abstract class Enum
     {
         $ref = new ReflectionObject($this);
         $constants = $ref->getConstants();
+
         if (!in_array($value, $constants, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     '%s must be %s',
-                    get_called_class(),
+                    static::class,
                     implode(' or ', $constants)
                 )
             );
@@ -26,14 +27,14 @@ abstract class Enum
         $this->value = $value;
     }
 
-    public function value()
-    {
-        return $this->value;
-    }
-
     public function __toString(): string
     {
         return (string)$this->value;
+    }
+
+    public function value()
+    {
+        return $this->value;
     }
 
     public function toInt(): int

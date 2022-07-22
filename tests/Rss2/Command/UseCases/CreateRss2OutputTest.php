@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Tests\Rss2\Command\UseCases;
 
-use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Output;
 use PHPUnit\Framework\TestCase;
+use SimpleRssMaker\Rss2\Command\UseCases\CreateRss2Output;
 use SimpleRssMaker\Rss2\Models\Entities\Rss2;
 use SimpleRssMaker\Rss2\Models\Factories\ChannelFactory;
 use SimpleRssMaker\Shared\Models\ValueObjects\RssVersion;
@@ -12,10 +12,12 @@ use SimpleRssMaker\Shared\Models\ValueObjects\XmlEncoding;
 use SimpleRssMaker\Shared\Models\ValueObjects\XmlVersion;
 use Tests\TestHelper\StrTestHelper;
 
-class CreateRss2OutputTest extends TestCase
+final class CreateRss2OutputTest extends TestCase
 {
     private XmlVersion $xmlVersion;
+
     private XmlEncoding $xmlEncoding;
+
     private RssVersion $rssVersion;
 
     protected function setUp(): void
@@ -25,7 +27,8 @@ class CreateRss2OutputTest extends TestCase
         $this->xmlEncoding = new XmlEncoding(XmlEncoding::UTF8);
         $this->rssVersion = new RssVersion(RssVersion::VERSION_2);
     }
-    public function testOutput()
+
+    public function testOutput(): void
     {
         $output = new CreateRss2Output();
         $this->assertInstanceOf(CreateRss2Output::class, $output);

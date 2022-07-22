@@ -7,7 +7,7 @@ use SimpleRssMaker\Rss2\Models\ValueObjects\Title;
 use SimpleRssMaker\Rss2\Models\ValueObjects\Url;
 use SimpleRssMaker\Shared\Models\Entities\Image;
 
-class ImageFactory implements ImageFactoryInterface
+final class ImageFactory implements ImageFactoryInterface
 {
     public function newImage(
         string $title,

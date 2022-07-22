@@ -7,13 +7,13 @@ abstract class StringBaseValue
 {
     protected string $value;
 
-    public function isEmpty(): bool
-    {
-        return mb_strlen((string)$this->value) === 0;
-    }
-
     public function __toString(): string
     {
-        return (string)$this->value;
+        return $this->value;
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->value === '';
     }
 }

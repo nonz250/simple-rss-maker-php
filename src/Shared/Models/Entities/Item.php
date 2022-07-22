@@ -47,7 +47,6 @@ final class Item
      */
     private ?Date $pubDate;
 
-
     public function __construct(
         Url $guid,
         Title $title,

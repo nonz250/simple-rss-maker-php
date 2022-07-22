@@ -6,6 +6,7 @@ namespace Tests;
 use DateTime;
 use DateTimeZone;
 use Exception;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 use SimpleRssMaker\Rss2\Models\Collections\ItemCollection;
@@ -14,11 +15,10 @@ use SimpleRssMaker\Shared\Models\Entities\Channel;
 use SimpleRssMaker\Shared\Models\Entities\Image;
 use SimpleRssMaker\Shared\Models\ValueObjects\Language;
 use SimpleRssMaker\SimpleRssMaker;
-use PHPUnit\Framework\TestCase;
 use SimpleRssMaker\SimpleRssMakerInterface;
 use Tests\TestHelper\StrTestHelper;
 
-class SimpleRssMakerTest extends TestCase
+final class SimpleRssMakerTest extends TestCase
 {
     public function test__construct()
     {
@@ -29,9 +29,10 @@ class SimpleRssMakerTest extends TestCase
 
     /**
      * @depends test__construct
+     *
      * @param SimpleRssMakerInterface $simpleRssMaker
      */
-    public function testException(SimpleRssMakerInterface $simpleRssMaker)
+    public function testException(SimpleRssMakerInterface $simpleRssMaker): void
     {
         $this->expectException(ChannelNotExistException::class);
         $simpleRssMaker->rss2();
@@ -39,10 +40,12 @@ class SimpleRssMakerTest extends TestCase
 
     /**
      * @depends test__construct
+     *
      * @param SimpleRssMakerInterface $simpleRssMaker
+     *
      * @throws ReflectionException
      */
-    public function testSetChannel(SimpleRssMakerInterface $simpleRssMaker)
+    public function testSetChannel(SimpleRssMakerInterface $simpleRssMaker): void
     {
         $simpleRssMaker->setChannel(
             StrTestHelper::createRandomStr(),
@@ -59,10 +62,12 @@ class SimpleRssMakerTest extends TestCase
 
     /**
      * @depends test__construct
+     *
      * @param SimpleRssMakerInterface $simpleRssMaker
+     *
      * @throws ReflectionException
      */
-    public function testSetImage(SimpleRssMakerInterface $simpleRssMaker)
+    public function testSetImage(SimpleRssMakerInterface $simpleRssMaker): void
     {
         $simpleRssMaker->setImage(
             StrTestHelper::createRandomStr(),
@@ -79,10 +84,12 @@ class SimpleRssMakerTest extends TestCase
 
     /**
      * @depends test__construct
+     *
      * @param SimpleRssMakerInterface $simpleRssMaker
+     *
      * @throws ReflectionException
      */
-    public function testaddItem(SimpleRssMakerInterface $simpleRssMaker)
+    public function testaddItem(SimpleRssMakerInterface $simpleRssMaker): void
     {
         $simpleRssMaker->addItem(
             StrTestHelper::createRandomStr(),
@@ -106,17 +113,19 @@ class SimpleRssMakerTest extends TestCase
 
     /**
      * @depends test__construct
+     *
      * @param SimpleRssMakerInterface $simpleRssMaker
+     *
      * @throws Exception
      */
-    public function testRss2(SimpleRssMakerInterface $simpleRssMaker)
+    public function testRss2(SimpleRssMakerInterface $simpleRssMaker): void
     {
         $title = StrTestHelper::createRandomStr();
         $link = StrTestHelper::createRandomUrl();
         $description = StrTestHelper::createRandomStr();
         $language = Language::LANGUAGE_JAPANESE;
         $copyright = StrTestHelper::createRandomStr();
-        $pubDate = new DateTime('now', new DateTimeZone('UTC'));
+        $pubDate = new \DateTimeImmutable('now', new DateTimeZone('UTC'));
         $category = StrTestHelper::createRandomStr();
         $imageTitle = StrTestHelper::createRandomStr();
         $imageLink = StrTestHelper::createRandomUrl();
@@ -126,7 +135,7 @@ class SimpleRssMakerTest extends TestCase
         $itemDescription = StrTestHelper::createRandomStr();
         $itemAuthor = StrTestHelper::createRandomStr();
         $itemCategory = StrTestHelper::createRandomStr();
-        $itemDate = new DateTime('now', new DateTimeZone('UTC'));
+        $itemDate = new \DateTimeImmutable('now', new DateTimeZone('UTC'));
 
         $rss2 = $simpleRssMaker
             ->setChannel($title, $link, $description, $language, $copyright, $category, $pubDate)
@@ -168,6 +177,6 @@ class SimpleRssMakerTest extends TestCase
 </rss>
 
 XML;
-        $this->assertEquals((string)$expected, (string)$rss2);
+        $this->assertSame((string)$expected, (string)$rss2);
     }
 }
